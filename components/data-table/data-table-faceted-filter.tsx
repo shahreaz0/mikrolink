@@ -37,19 +37,22 @@ export function DataTableFacetedFilter<TData, TValue>({
 
   const [hasInitialized, setHasInitialized] = React.useState(false)
 
-  const selectedValues = React.useMemo(() => {
-    const filterValues = column?.getFilterValue() as string[] | undefined
-
-    if (!hasInitialized) {
-      setHasInitialized(true)
+  // Initialize filter with defaultValues on mount
+  React.useEffect(() => {
+    if (!hasInitialized && column) {
+      const filterValues = column.getFilterValue() as string[] | undefined
       if ((!filterValues || filterValues.length === 0) && defaultValues.length > 0) {
-        column?.setFilterValue(defaultValues)
-        return new Set(defaultValues)
+        column.setFilterValue(defaultValues)
       }
+      setHasInitialized(true)
     }
+  }, []) // Only run once on mount
 
-    return new Set(filterValues || [])
-  }, [column, defaultValues, hasInitialized])
+  const filterValue = column?.getFilterValue() as string[] | undefined
+
+  const selectedValues = React.useMemo(() => {
+    return new Set(filterValue || [])
+  }, [filterValue])
 
   return (
     <Popover>

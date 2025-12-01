@@ -82,17 +82,15 @@ export const months = [
   { value: "DECEMBER", label: "December", icon: CalendarIcon },
 ]
 
-// export const years = (() => {
-//   const current = new Date().getFullYear()
+export const years = (() => {
+  const current = new Date().getFullYear()
 
-//   return Array.from({ length: 10 }, (_, i) => {
-//     const year = current + (5 - i)
-//     return {
-//       value: String(year),
-//       label: String(year),
-//       icon: CalendarIcon,
-//     }
-//   })
-// })()
-
-// console.log(years)
+  return Array.from({ length: 10 }, (_, i) => {
+    const year = current + (5 - i)
+    return {
+      value: String(year),
+      label: String(year),
+      icon: CalendarIcon,
+    }
+  })
+})()

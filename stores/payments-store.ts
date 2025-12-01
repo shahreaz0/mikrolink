@@ -7,4 +7,7 @@ export const { useStore: usePaymentsStore, reset: resetPaymentsStore } = createS
   isUpsertPaymentDialogOpen: false,
   paymentMutationType: "" as "add" | "edit",
   selectedPayment: {} as Payment,
+  paymentFilters: {
+    year: new Date().getFullYear().toString(),
+  },
 })
